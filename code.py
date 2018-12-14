@@ -3,8 +3,8 @@ import pandas as pd
 import xgboost as xgb
 from aux import *
 
-train_raw = pd.read_csv("data/train.csv")
-test = pd.read_csv("data/test.csv")
+train_raw = pd.read_csv("../data/train.csv")
+test = pd.read_csv("../data/test.csv")
 
 output = train_raw["Category"] # Output variable
 
