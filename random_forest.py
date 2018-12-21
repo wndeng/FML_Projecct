@@ -7,6 +7,7 @@ from sklearn.ensemble import RandomForestClassifier
 import math
 from sklearn.metrics import make_scorer
 from sklearn.model_selection import cross_val_score
+import time
 
 data, output, num_class = get_data()
 
@@ -19,7 +20,10 @@ seed = 4321
 
 rf = RandomForestClassifier(n_estimators=100, max_depth=20, random_state=seed)
 
+t0 = time.time()
 rf.fit(train, y_train)
+t1 = time.time()
+print(t1 - t0)
 
 result = rf.predict_proba(test)
 
@@ -33,4 +37,8 @@ def obj_func(y_true, y_pred):
 
 scoring_func = make_scorer(obj_func, needs_proba=True)
 
-print(cross_val_score(rf, train, y_train, cv=5, scoring=scoring_func))
+# a = cross_val_score(rf, train, y_train, cv=5, scoring=scoring_func)
+# print(a.mean())
+y_pred = rf.predict_proba(test);
+
+print(obj_func(y_test, y_pred));
